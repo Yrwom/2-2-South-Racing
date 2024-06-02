@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!--
+   New Perspectives on XML
+   Tutorial 2
+   Case Problem 4
+
+   South Racing summary
+   Author: Nicholas Mowry
+   Date:   6/2/2024
+
+   Filename:         south.xml
+   Supporting Files: cars.xml, teams.xml
+-->
+<!DOCTYPE racing [
+   <!ATTLIST t:teams xmlns:c CDATA #FIXED "http://example.com/southracing/t:teams">
+   <!ELEMENT t:teams (t:team+)>
+   <!ATTLIST t:team tid ID #REQUIRED>
+   <!ATTLIST t:team cars IDREFS #REQUIRED>
+   <!ELEMENT t:team (t:title, t:description, t:series)>
+   <!ELEMENT t:title (#PCDATA)>
+   <!ELEMENT t:description (#PCDATA)>
+   <!ELEMENT t:series (#PCDATA)>
+   <!ATTLIST c:cars xmlns:t CDATA #FIXED "http://example.com/southracing/c:cars">
+   <!ELEMENT c:cars (c:car+)>
+   <!ATTLIST c:car cid ID #REQUIRED>
+   <!ATTLIST c:car team IDREFS #REQUIRED>
+   <!ELEMENT c:car (c:title, c:model, c:driver)>
+   <!ELEMENT c:title (#PCDATA)>
+   <!ELEMENT c:model (#PCDATA)>
+   <!ELEMENT c:driver (#PCDATA)>
+   <!ATTLIST racing 
+   xmlns CDATA #FIXED "http://example.com/southracing"
+   xmlns:t CDATA #FIXED "http://example.com/southracing/teams"
+   xmlns:c CDATA #FIXED "http://example.com/southracing/cars">
+   <!ELEMENT racing (t:teams, c:cars)>
+   <!ENTITY teamsList SYSTEM "teams.xml">
+   <!ENTITY carsList SYSTEM "cars.xml">
+]>
+<racing xmlns= "http://example.com/southracing" xmlns:t= "http://example.com/southracing/teams" xmlns:c= "http://example.com/southracing/cars">
+   &teamsList;
+   &carsList;
+</racing>
